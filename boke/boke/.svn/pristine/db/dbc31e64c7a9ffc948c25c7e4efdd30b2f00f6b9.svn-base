@@ -1,0 +1,157 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2018/6/28
+ * Time: 14:20
+ */
+
+namespace app\admin\model;
+use think\Model;
+
+class Cars extends Model
+{
+    /**
+     * 获取最后一个id如果没有则返回1
+     * @return array|int
+     * @author zhanghanwen
+     */
+    public function getLastId(){
+        $id = $this->order('id','desc')->column('id');
+        if(!$id){
+            $id = 1;
+        } else{
+            $id = $id['0'];
+        }
+        return $id;
+    }
+
+    /*
+     * 填充数据
+     * author zhanghanwen
+     */
+    public function fillData(){
+        $user = new Cars([
+            'name'  =>  'default',
+        ]);
+        $user->save();
+    }
+
+    /**
+     * @param $id
+     * @param $name
+     * @param $status
+     * @param $description
+     * @return false|int
+     * @author zhanghanwen
+     */
+    public function addCar($id,$name,$status,$description){
+        return $this->save([
+            'description'  => $description,
+            'status'=>$status,
+            'name'=>$name
+        ],['id' => $id]);
+    }
+
+    /**
+     * 汽车列表
+     */
+    public function getCarList(){
+        return $this->paginate(10);
+    }
+
+    /**
+     * 添加图片
+     * @param $id
+     * @param $img
+     * author zhanghanwen
+     */
+    public function addCarImg($id,$img){
+        $imgData = $this->where('id',$id)->value('imgAll');
+        if(!$imgData){
+            $imgData = $img;;
+        } else{
+            $imgData = $imgData .';'.$img;
+        }
+        $this->save([
+            'imgAll'  => $imgData,
+        ],['id' => $id]);
+    }
+
+    /**
+     * 删除某个图片
+     * @param $tid
+     * @param $id
+     * @return bool|false|int
+     * author zhanghanwen
+     */
+    public function deletePicture($tid,$id){
+        $data = $this->where('id',$tid)->value('imgAll');
+        if(!$data){
+            return false;
+        } else{
+            $data = explode(';',$data);
+            if(isset($data[$id])){
+                unset($data[$id]);
+            }
+            $data = implode(';',$data);
+            return $this->save([
+                'imgAll'  => $data,
+            ],['id' => $tid]);
+        }
+    }
+
+    /**
+     * 获取车辆详情
+     * @param $id
+     * @return array|false|\PDOStatement|string|Model
+     * @author zhanghanwen
+     */
+    public function getCarDeteal($id){
+        return $this->where('id',$id)->find();
+    }
+
+    /**
+     * @param $id
+     * @param $tid
+     * 删除图片和文字说明
+     */
+    public function deletePictureForEdit($id,$tid){
+        $data = $this->where('id',$tid)->value('imgAll');
+        if(!$data){
+
+        } else{
+            $data = explode(';',$data);
+            if(isset($data[$id])){
+                unset($data[$id]);
+            }
+            $data = implode(';',$data);
+             $this->save([
+                'imgAll'  => $data,
+            ],['id' => $tid]);
+        }
+        $data = $this->where('id',$tid)->value('description');
+        if(!$data){
+
+        } else{
+            $data = explode('|',$data);
+            if(isset($data[$id])){
+                unset($data[$id]);
+            }
+            $data = implode('|',$data);
+             $this->save([
+                'description'  => $data,
+            ],['id' => $tid]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return int
+     * @author zhanghanwen
+     */
+    public function deleteCar($id){
+        return $this->where('id',$id)->delete();
+    }
+}
+

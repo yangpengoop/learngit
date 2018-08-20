@@ -1,0 +1,22 @@
+<?php
+namespace app\admin\controller;
+use think\Controller;
+
+class Base extends controller
+{
+    public function __construct()
+    {
+        $this->checkIsLogin();
+    }
+
+    /**
+     * 检测是否登录
+     * @author zhanghanwen
+     *
+     */
+    private function checkIsLogin(){
+        if(!session('user_id')){
+            $this->redirect('Login/index');
+        }
+    }
+}

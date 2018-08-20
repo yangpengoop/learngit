@@ -1,0 +1,252 @@
+[ 2018-07-10T15:34:51+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo
+[ log ] flower.com/index/movie/demo [运行时间：0.169918s][吞吐率：5.89req/s] [内存消耗：2,473.09kb] [文件加载：54]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001545s ] mysql:dbname=target;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `trade_user` [ RunTime:0.022214s ]
+[ sql ] [ SQL ] SELECT * FROM `trade_user` LIMIT 10 [ RunTime:0.000338s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'trade_user',
+  'type' => 'ALL',
+  'possible_keys' => NULL,
+  'key' => NULL,
+  'key_len' => NULL,
+  'ref' => NULL,
+  'rows' => 118379,
+  'extra' => '',
+) ]
+
+---------------------------------------------------------------
+[ 2018-07-10T15:38:21+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo
+[ log ] flower.com/index/movie/demo [运行时间：0.092815s][吞吐率：10.77req/s] [内存消耗：2,469.20kb] [文件加载：54]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001230s ] mysql:dbname=target;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `trade_user` [ RunTime:0.016490s ]
+[ sql ] [ SQL ] SELECT * FROM `trade_user` WHERE  `uid` = 180 [ RunTime:0.022251s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'trade_user',
+  'type' => 'const',
+  'possible_keys' => 'PRIMARY,uid',
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 1,
+  'extra' => '',
+) ]
+
+---------------------------------------------------------------
+[ 2018-07-10T15:38:39+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo
+[ log ] flower.com/index/movie/demo [运行时间：0.040182s][吞吐率：24.89req/s] [内存消耗：2,468.87kb] [文件加载：54]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000845s ] mysql:dbname=target;host=127.0.0.1;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `trade_user` [ RunTime:0.012204s ]
+[ sql ] [ SQL ] SELECT * FROM `trade_user` WHERE  `uid` = 180 [ RunTime:0.000300s ]
+[ sql ] [ EXPLAIN : array (
+  'id' => 1,
+  'select_type' => 'SIMPLE',
+  'table' => 'trade_user',
+  'type' => 'const',
+  'possible_keys' => 'PRIMARY,uid',
+  'key' => 'PRIMARY',
+  'key_len' => '4',
+  'ref' => 'const',
+  'rows' => 1,
+  'extra' => '',
+) ]
+
+---------------------------------------------------------------
+[ 2018-07-10T15:56:04+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo1
+[ log ] flower.com/index/movie/demo1 [运行时间：0.020888s][吞吐率：47.87req/s] [内存消耗：1,795.91kb] [文件加载：49]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo1',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo1[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-07-10T15:56:54+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo1
+[ log ] flower.com/index/movie/demo1 [运行时间：0.068653s][吞吐率：14.57req/s] [内存消耗：1,820.78kb] [文件加载：52]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo1',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo1[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ LOG ] INIT File
+[ error ] [0]致命错误: Call to undefined function app\index\controller\is_set()[E:\wwwroot\flower\application\index\controller\Movie.php:39]
+
+---------------------------------------------------------------
+[ 2018-07-10T15:57:13+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo1
+[ log ] flower.com/index/movie/demo1 [运行时间：0.058077s][吞吐率：17.22req/s] [内存消耗：1,820.78kb] [文件加载：52]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo1',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo1[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ LOG ] INIT File
+[ error ] [0]致命错误: Call to undefined function app\index\controller\is_set()[E:\wwwroot\flower\application\index\controller\Movie.php:39]
+
+---------------------------------------------------------------
+[ 2018-07-10T15:57:42+08:00 ] 127.0.0.1 127.0.0.1 GET /index/movie/demo1
+[ log ] flower.com/index/movie/demo1 [运行时间：0.018225s][吞吐率：54.87req/s] [内存消耗：1,796.72kb] [文件加载：49]
+[ info ] [ LANG ] E:\wwwroot\flower\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'movie',
+    2 => 'demo1',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'flower.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'thinkphp_show_page_trace=1|4; pgv_pvi=4315825152',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\index\controller\Movie->demo1[ E:\wwwroot\flower\application\index\controller\Movie.php ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------

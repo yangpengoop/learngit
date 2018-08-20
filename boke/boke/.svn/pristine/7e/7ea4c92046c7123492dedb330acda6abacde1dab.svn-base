@@ -1,0 +1,159 @@
+<?php
+namespace app\admin\controller;
+use app\admin\model\Cars;
+use think\Request;
+class Car extends Base
+{
+    public function index()
+    {
+
+    }
+
+    public function dashboard(){
+        return $this->fetch('dashboard');
+    }
+
+    public function car_list(){
+        $carModel = new Cars();
+        $carList = $carModel->getCarList();
+        return $this->fetch('car_list',['list'=>$carList]);
+    }
+
+    /**
+     * 添加喜车方法
+     * @return mixed
+     * @author zhanghanwen
+     */
+    public function add_car(){
+        $carModel = new Cars();
+        if(Request::instance()->isPost()){
+            $this->checkAddCarParam();
+            $name = trim(strip_tags(input('name')));
+            $status = trim(strip_tags(input('status')));
+            $id = trim(strip_tags(input('id')));
+            $description = $_POST['description'];
+            if($description){
+                $description = trim(strip_tags(implode('|',$description)));
+            }
+            if($carModel->addCar($id,$name,$status,$description)){
+                $this->success('添加成功！');
+            } else{
+                $this->error('添加失败！');
+            }
+        } else{
+            $lastId = $carModel->getLastId();
+            $carModel->fillData();
+            return $this->fetch('add_car',['id'=>$lastId]);
+        }
+    }
+
+    /**
+     * 检测参数是否存在
+     */
+    public function checkAddCarParam(){
+        $id = trim(strip_tags(input('id')));
+        $name = trim(strip_tags(input('name')));
+        $status = trim(strip_tags(input('status')));
+        if(!$id){
+            $this->error("请填写ID");
+        }
+        if(!is_numeric($id)){
+            $this->error("ID必须为数字");
+        }
+        if(!$name){
+            $this->error("请填写标题");
+        }
+        if(!$status){
+            $this->error("请填写汽车级别");
+        }
+        if(!is_numeric($status)){
+            $this->error("汽车级别必须为数字");
+        }
+    }
+
+    public function delete_car_picture_edit(){
+        $id = input('id');
+        $tid = input('tid');
+        $carModel = new Cars();
+        $carModel->deletePictureForEdit($id,$tid);
+    }
+
+    /**
+     * 编辑车辆
+     */
+    public function edit_car(){
+        $carModel = new Cars();
+        if(Request::instance()->isPost()){
+            $this->checkAddCarParam();
+            $name = trim(strip_tags(input('name')));
+            $status = trim(strip_tags(input('status')));
+            $id = trim(strip_tags(input('id')));
+            $description = $_POST['description'];
+            if($description){
+                $description = trim(strip_tags(implode('|',$description)));
+            }
+            if($carModel->addCar($id,$name,$status,$description)){
+                $this->success('添加成功！');
+            } else{
+                $this->error('添加失败！');
+            }
+        } else{
+            $id = input('id');
+            $carModel = new Cars();
+            $carDeteal = $carModel->getCarDeteal($id);
+            $imgData = explode(';',$carDeteal->imgAll);
+            $descriptionData = explode('|',$carDeteal->description);
+            return $this->fetch('edit_car',['detail'=>$carDeteal,'img'=>json_encode($imgData),'description'=>json_encode($descriptionData)]);
+        }
+    }
+
+    /**
+     * 添加图片
+     * @author zhanghanwen
+     */
+    public function add_car_picture(){
+        $uploadRs = $this->upload();
+        if($uploadRs){
+            $id = input('id');
+            $carModel = new Cars();
+            $carModel->addCarImg($id,$uploadRs);
+            die(json_encode(['code'=>200]));
+        } else{
+            die(json_encode(['code'=>201]));
+        }
+
+    }
+
+    /**
+     * 文件上传
+     * @return bool
+     * author zhanghanwen
+     */
+    private function upload(){
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('file');
+
+        // 移动到框架应用根目录/public/uploads/ 目录下
+        if($file){
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+            if($info){
+                // 成功上传后 获取上传信息
+                // 输出 jpg
+                return $info->getSaveName();
+            }else{
+                return false;
+            }
+        }
+    }
+
+    /**
+     * 删除图片
+     * @author zhanghanwen
+     */
+    public function delete_car_picture(){
+        $id = input('id');
+        $tid = input('tid');
+        $carModel = new Cars();
+        $carModel->deletePicture($tid,$id);
+    }
+}
