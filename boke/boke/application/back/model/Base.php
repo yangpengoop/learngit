@@ -89,7 +89,7 @@ class Base extends Model
      * @param  array $data  添加的数据
      * @return int          新增的数据id
      */
-    public function addData($data){
+    public function addData($data){dump($data);die;
         // 去除键值首尾的空格
         foreach ($data as $k => $v) {
             $data[$k]=trim($v);

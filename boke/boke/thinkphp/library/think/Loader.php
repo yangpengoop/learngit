@@ -462,6 +462,8 @@ class Loader
         }
         self::$instance[$guid] = $validate;
         return $validate;
+        
+        
     }
 
     /**

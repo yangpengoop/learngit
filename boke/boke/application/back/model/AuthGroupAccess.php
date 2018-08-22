@@ -32,9 +32,9 @@ class AuthGroupAccess extends Base
         $data=$this
             ->field('u.id,u.username,u.email,aga.group_id,ag.title')
             ->alias('aga')
-            ->join('__ADMIN_USER__ u ON aga.uid=u.id','RIGHT')
-            ->join('__AUTH_GROUP__ ag ON aga.group_id=ag.id','LEFT')
-            ->select();
+            ->join('__ADMIN_USER__ u','aga.uid=u.id','RIGHT')
+            ->join('__AUTH_GROUP__ ag','aga.group_id=ag.id','LEFT')
+            ->select()->toArray();
         // 获取第一条数据
         $first=$data[0];
         $first['title']=array();

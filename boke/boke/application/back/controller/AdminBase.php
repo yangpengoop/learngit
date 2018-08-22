@@ -29,5 +29,6 @@ class AdminBase extends Base
         );
         $this->assign('request_url',$rule_name);
         $this->assign($assign);
+        $this->assign('data',json_encode($nav_data));
     }
 }

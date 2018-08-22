@@ -8,7 +8,7 @@
 
 namespace app\back\model;
 use app\back\model\Base;
-use app\back\validate\adminUser as adminUserValidate;
+use app\back\validate\AdminUserValidate;
 class AdminUser extends Base
 {
     /**
@@ -16,13 +16,20 @@ class AdminUser extends Base
      */
     public function addData($data){
         // 对data数据进行验证
-        if(!$data=$this->validate($data,adminUserValidate)){
+        $v_data['username']=$data['username'];
+        $v_data['phone']=$data['phone'];
+        $v_data['email']=$data['email'];
+        $v_data['password']=$data['password'];
+        $v_data['status']=$data['status'];
+        $res = $this->validate('AdminUserValidate')->save($v_data);
+        unset($v_data['group_id']);
+        if(!$res ){
             // 验证不通过返回错误
-            return false;
+            return ['code'=>false,'msg'=>$this->getError()];
         }else{
             // 验证通过
-            $result=$this->add($data);
-            return $result;
+            $result=$this->save($v_data);
+            return ['code'=>true,'msg'=>$this->id];
         }
     }
 
@@ -31,15 +38,24 @@ class AdminUser extends Base
      */
     public function editData($map,$data){
         // 对data数据进行验证
-        if(!$data=$this->validate($data,adminUserValidate)){
+        $v_data['username']=$data['username'];
+        $v_data['id']=$data['id'];
+        if(isset($data['phone'])){
+            $v_data['phone']=$data['phone'];
+        }
+        if(isset($data['email'])){
+            $v_data['email']=$data['email'];
+        }
+        if(isset($data['password'])){
+            $v_data['password']=$data['password'];
+        }
+        $v_data['status']=$data['status'];//dump($data);die;
+        if(!$data=$this->validate('adminUserValidate')->update($v_data)){
             // 验证不通过返回错误
-            return false;
+            return ['code'=>false,'msg'=>$this->getError()];
         }else{
-            // 验证通过
-            $result=$this
-                ->where(array($map))
-                ->save($data);
-            return $result;
+
+            return ['code'=>true,'msg'=>$data['id']];
         }
     }
 

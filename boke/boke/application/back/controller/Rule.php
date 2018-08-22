@@ -224,26 +224,26 @@ class Rule extends AdminBase
      * 管理员列表
      */
     public function admin_user_list(){
-        $data=model('AuthGroupAccess')->getAllData();dump($data);die;
+        $data=model('AuthGroupAccess')->getAllData();
         $assign=array(
             'data'=>$data
         );
         $this->assign($assign);
-        $this->display();
+        return $this->fetch();
     }
 
     /**
      * 添加管理员
      */
     public function add_admin(){
-        if(IS_POST){
+        if(request()->isPost()){
             $data=input('post.');
             $result=model('AdminUser')->addData($data);
-            if($result){
+            if(true === $result['code']){
                 if (!empty($data['group_ids'])) {
                     foreach ($data['group_ids'] as $k => $v) {
                         $group=array(
-                            'uid'=>$result,
+                            'uid'=>$result['msg'],
                             'group_id'=>$v
                         );
                         model('AuthGroupAccess')->addData($group);
@@ -252,17 +252,17 @@ class Rule extends AdminBase
                 // 操作成功
                 $this->success('添加成功',Url('back/Rule/admin_user_list'));
             }else{
-                $error_word=moder('AdminUser')->getError();
+                $error_word=$result['msg'];
                 // 操作失败
                 $this->error($error_word);
             }
         }else{
-            $data=model('AuthGroup')->select();
+            $data=model('AuthGroup')->select()->toArray();
             $assign=array(
                 'data'=>$data
             );
             $this->assign($assign);
-            $this->display();
+            return $this->fetch();
         }
     }
 
@@ -270,7 +270,7 @@ class Rule extends AdminBase
      * 修改管理员
      */
     public function edit_admin(){
-        if(IS_POST){
+        if(request()->isPost()){
             $data=input('post.');
             // 组合where数组条件
             $uid=$data['id'];
@@ -278,10 +278,10 @@ class Rule extends AdminBase
                 'id'=>$uid
             );
             // 修改权限
-            model('AuthGroupAccess')->deleteData(array('uid'=>$uid));
+//            model('AuthGroupAccess')->deleteData(array('uid'=>$uid));
             foreach ($data['group_ids'] as $k => $v) {
                 $group=array(
-                    'Urlid'=>$uid,
+                    'uid'=>$uid,
                     'group_id'=>$v
                 );
                 model('AuthGroupAccess')->addData($group);
@@ -291,15 +291,15 @@ class Rule extends AdminBase
             if (!empty($data['password'])) {
                 $data['password']=md5($data['password']);
             }
-            // p($data);die;
-            $result=model('Users')->editData($map,$data);
-            if($result){
+
+            $result=model('AdminUser')->editData($map,$data);
+            if(true === $result['code']){
                 // 操作成功
                 $this->success('编辑成功',Url('back/Rule/edit_admin',array('id'=>$uid)),'',1);
             }else{
                 $error_word=model('AdminUser')->getError();
                 if (empty($error_word)) {
-                    $this->success('编辑成功',Url('back/Rule/edit_admin',array('id'=>$uid)),'',1);
+                    $this->success('编辑失败',Url('back/Rule/edit_admin',array('id'=>$uid)),'',1);
                 }else{
                     // 操作失败
                     $this->error($error_word);
@@ -307,22 +307,23 @@ class Rule extends AdminBase
 
             }
         }else{
-            $id=input('get.id',0,'intval');
+            $id=input('id',0,'intval');
             // 获取用户数据
             $user_data=model('AdminUser')->find($id);
             // 获取已加入用户组
-            $group_data=M('AuthGroupAccess')
+            $group_data=model('AuthGroupAccess')
                 ->where(array('uid'=>$id))
-                ->getField('group_id',true);
+                ->field('group_id')
+                ->find()->toArray();
             // 全部用户组
-            $data=model('AuthGroup')->select();
+            $data=model('AuthGroup')->select()->toArray();
             $assign=array(
                 'data'=>$data,
                 'user_data'=>$user_data,
                 'group_data'=>$group_data
             );
             $this->assign($assign);
-            $this->display();
+            return $this->fetch();
         }
     }
 
